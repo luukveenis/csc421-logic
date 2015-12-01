@@ -1,5 +1,5 @@
+require './ast'
 require './evaluator'
-require './parse_tree'
 
 def assert_true val
   raise "Test failed with val: #{val}" unless val
@@ -7,15 +7,15 @@ def assert_true val
 end
 
 expr1 = "( ^ ( ! A ) B )"
-tree1 = ParseTree.new(expr1.split)
+tree1 = AST.new(expr1.split)
 eval1 = Evaluator.new(expr1, { "A" => true, "B" => false })
 eval1_2 = Evaluator.new(expr1, { "A" => false, "B" => true })
 expr2 = "A"
-tree2 = ParseTree.new(expr2.split)
+tree2 = AST.new(expr2.split)
 expr3 = "( -> ( ^ A B ) ( v C ( ! B ) ) )"
-tree3 = ParseTree.new(expr3.split)
+tree3 = AST.new(expr3.split)
 expr4 = "( -> A B )"
-tree4 = ParseTree.new(expr4.split)
+tree4 = AST.new(expr4.split)
 eval4_1 = Evaluator.new(expr4, { "A" => true, "B" => true })
 eval4_2 = Evaluator.new(expr4, { "A" => true, "B" => false })
 eval4_3 = Evaluator.new(expr4, { "A" => false, "B" => true })

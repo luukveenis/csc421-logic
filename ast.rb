@@ -1,7 +1,7 @@
 require './node'
 
-# Class to represent a parse tree of the syntax designed for this assignment
-class ParseTree
+# Class to represent an AST of the syntax designed for this assignment
+class AST
   attr_reader :root
 
   BINARY_OPS = ["^", "v", "->", "<->"]
@@ -32,9 +32,9 @@ class ParseTree
 
   private
 
-  # Recursive parser to build parse tree
+  # Recursive parser to build the AST
   def parse expr
-    # If the expression is not a primitive, parse it recursivelt
+    # If the expression is not a primitive, parse it recursively
     if expr[0] == "("
       op = expr[1]
 

@@ -1,4 +1,4 @@
-require './parse_tree'
+require './ast'
 
 class Evaluator
   def initialize formula, assignment
@@ -7,7 +7,7 @@ class Evaluator
   end
 
   def eval
-    tree = ParseTree.new(@formula.split).simplify
+    tree = AST.new(@formula.split).simplify
     tree.eval(@assignment)
   end
 end
