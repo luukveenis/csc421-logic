@@ -44,7 +44,7 @@ class ParseTree
           b = expr[(close + 1)..-1]
         # First operand is a primitive
         else
-          a = expr[2]
+          a = expr[2..2]
           b = expr[3..-2]
         end
         Node.new(op, parse(a), parse(b))
