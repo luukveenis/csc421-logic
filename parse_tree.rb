@@ -20,6 +20,10 @@ class ParseTree
     self
   end
 
+  def eval assignment
+    eval_node @root, assignment
+  end
+
   # Converts the tree back into an expression using the syntax defined for
   # this assignment
   def to_s
@@ -101,5 +105,25 @@ class ParseTree
     end
     remove_implications node.left
     remove_implications node.right
+  end
+
+  # Recursively evaluate the node given the provided variable assignments
+  def eval_node node, assignment
+    # If the node is a leaf simply look up the assignment
+    if node.leaf?
+      assignment[node.val]
+    # If the node is unary, we know it's a not (!)
+    # This is not very generalized, but it's valid for the syntax defined
+    elsif node.unary?
+      !eval_node(node.left, assignment)
+    # The node is binary and we assume implications are removed
+    else
+      case node.val
+      when "^"
+        eval_node(node.left, assignment) && eval_node(node.right, assignment)
+      when "v"
+        eval_node(node.left, assignment) || eval_node(node.right, assignment)
+      end
+    end
   end
 end
