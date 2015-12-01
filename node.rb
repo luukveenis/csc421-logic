@@ -11,4 +11,18 @@ class Node
   def leaf?
     @left.nil? && @right.nil?
   end
+
+  def unary?
+    !@left.nil? && @right.nil?
+  end
+
+  def to_s
+    if leaf?
+      val
+    elsif unary?
+      "( #{val} #{@left.to_s} )"
+    else
+      "( #{val} #{@left.to_s} #{@right.to_s} )"
+    end
+  end
 end

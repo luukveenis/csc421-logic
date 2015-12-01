@@ -14,6 +14,10 @@ class ParseTree
     @root = parse(expr)
   end
 
+  def to_s
+    @root.to_s
+  end
+
   private
 
   # Recursive parser to build parse tree
