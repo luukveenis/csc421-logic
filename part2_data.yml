@@ -19,3 +19,45 @@ assignments:
     p4: false
     p5: true
     p6: false
+  I3:
+    p1: true
+    p2: true
+    p3: true
+    p4: true
+    p5: true
+    p6: true
+  I4:
+    p1: false
+    p2: false
+    p3: false
+    p4: false
+    p5: false
+    p6: false
+  I5:
+    p1: true
+    p2: true
+    p3: true
+    p4: false
+    p5: false
+    p6: false
+  I6:
+    p1: false
+    p2: false
+    p3: false
+    p4: true
+    p5: true
+    p6: true
+  I7:
+    p1: true
+    p2: false
+    p3: false
+    p4: true
+    p5: false
+    p6: true
+  I8:
+    p1: false
+    p2: true
+    p3: true
+    p4: true
+    p5: true
+    p6: false
