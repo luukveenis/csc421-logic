@@ -11,6 +11,8 @@ expr2 = "A"
 tree2 = ParseTree.new(expr2.split)
 expr3 = "( -> ( ^ A B ) ( v C ( ! B ) ) )"
 tree3 = ParseTree.new(expr3.split)
+expr4 = "( -> A B )"
+tree4 = ParseTree.new(expr4.split)
 
 # Tree 1
 assert_true(tree1.root.val == "^")
@@ -36,3 +38,6 @@ assert_true(tree3.root.right.right.val == "!")
 assert_true(tree3.root.right.right.left.val == "B")
 assert_true(tree3.root.right.right.right.nil?)
 assert_true(tree3.to_s == expr3)
+
+# Tree 4
+assert_true(tree4.simplify.to_s == "( v ( ! A ) B )")

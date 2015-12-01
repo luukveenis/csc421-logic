@@ -14,6 +14,14 @@ class ParseTree
     @root = parse(expr)
   end
 
+  # Returns the tree with all implications removed
+  def simplify
+    remove_implications @root
+    self
+  end
+
+  # Converts the tree back into an expression using the syntax defined for
+  # this assignment
   def to_s
     @root.to_s
   end
@@ -76,5 +84,22 @@ class ParseTree
       end
     end
     raise "Malformed expression, no closing paranthese"
+  end
+
+  # Replace all implications and double implications with their conjunction
+  # and disjunction counterparts
+  def remove_implications node
+    return if node.nil?
+
+    if node.val == "->"
+      node.val = "v"
+      node.left = Node.new("!", node.left, nil)
+    elsif node.val == "<->"
+      node.val = "^"
+      node.left = Node.new("->", node.left, node.right)
+      node.right = Node.new("->", node.right, node.left)
+    end
+    remove_implications node.left
+    remove_implications node.right
   end
 end

@@ -1,6 +1,6 @@
 # Simple class to represent nodes in the parse tree
 class Node
-  attr_reader :val, :left, :right
+  attr_accessor :val, :left, :right
 
   def initialize val, left, right
     @val = val
