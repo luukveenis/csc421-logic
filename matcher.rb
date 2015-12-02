@@ -7,9 +7,6 @@ class Matcher
     @quant = quant
   end
 
-  # Loves(Dog(Fred), Fred)
-  # Loves(x, x)
-
   # Returns a hash of variable bindings if the two match
   # Returns nil otherwise
   def match
@@ -45,18 +42,21 @@ class Matcher
   # Formats the quantified expression and returns a list of the variables
   # it contains
   def format_quant
-    # Match against the inner comma-separated list of variables
+    # Match against the inner comma-separated list
     m = @quant.match(/[A-Z][a-z]*\((.*)\)/)
     raise "Invalid expression" if m.nil?
 
     # Extract the variables as an array
     vars = m[1].split(",").map(&:strip)
 
+    # Replace only variables with formatted string
+    formatted = vars.map { |v| v.match(/^[a-z]$/) ? "%{#{v}}" : v }
+
     # Replace the quantified expression with a formatted string, where any
     # variable x is replaced with %{x}, allowing us to pass assignments to it.
-    @quant = @quant.sub(m[1], vars.map { |v| "%{#{v}}" }.join(", "))
+    @quant = @quant.sub(m[1], formatted.join(", "))
 
     # Return the list of variables
-    vars
+    vars.select { |v| v.match(/^[a-z]$/) }
   end
 end
